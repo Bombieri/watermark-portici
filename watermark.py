@@ -54,8 +54,14 @@ def _get_orientation_from_exif(exif):
  
  #main
 __location__ = os.path.abspath(os.path.dirname(sys.argv[0]))	#così l'eseguibile funziona in qualsiasi directory
-
 os.chdir(__location__)
+
+if not os.path.exists('pool'):  #creo directory pool se non esiste
+	os.makedirs('pool')
+
+if not os.path.exists('watermarked'):  #creo directory watermarked
+	os.makedirs('watermarked')
+	
 for file in glob.glob("./logo/*"):
 	LOGO = file
 perc_logo = 18
@@ -93,12 +99,6 @@ qual = 74
 while not (qual <=95 and qual >=75):
 	qual = int(input("Selezionare la qualità immagine finale dell'immagine su una scala da 75 a 95. Il valore di default è 75: "))
 log.write("Qualità immagini salvate: %d \n" % qual)
-
-if not os.path.exists('pool'):  #creo directory pool se non esiste
-	os.makedirs('pool')
-
-if not os.path.exists('watermarked'):  #creo directory watermarked
-	os.makedirs('watermarked')
 
 #ciclo su tutte le immagini ricorsivamente in ./pool
 for Filename in glob.iglob('./pool/**', recursive=True):														
