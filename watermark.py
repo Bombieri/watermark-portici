@@ -94,6 +94,12 @@ while not (qual <=95 and qual >=75):
 	qual = int(input("Selezionare la qualità immagine finale dell'immagine su una scala da 75 a 95. Il valore di default è 75: "))
 log.write("Qualità immagini salvate: %d \n" % qual)
 
+if not os.path.exists('pool'):  #creo directory pool se non esiste
+	os.makedirs('pool')
+
+if not os.path.exists('watermarked'):  #creo directory watermarked
+	os.makedirs('watermarked')
+
 #ciclo su tutte le immagini ricorsivamente in ./pool
 for Filename in glob.iglob('./pool/**', recursive=True):														
 	if not (Filename.lower().endswith(".png") or Filename.lower().endswith(".jpg") or Filename.lower().endswith(".jpeg") or Filename.lower().endswith(".bmp")) or Filename == LOGO:
